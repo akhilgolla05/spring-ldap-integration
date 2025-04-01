@@ -1,5 +1,6 @@
 package com.example.ad_integration.config;
 
+import com.example.ad_integration.utils.CustomLdapAuthoritiesPopulator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.ldap.core.ContextSource;
@@ -23,6 +24,7 @@ public class SecurityConfig {
 	      )
 	      .formLogin(Customizer.withDefaults());
 
+
 	    return http.build();
 	  }
 	 
@@ -41,9 +43,10 @@ public class SecurityConfig {
 	}
 	 
 	 @Bean
-	 public AuthenticationManager authenticationManager(BaseLdapPathContextSource source) {
+	 public AuthenticationManager authenticationManager(BaseLdapPathContextSource source, CustomLdapAuthoritiesPopulator authoritiesPopulator) {
 		 LdapBindAuthenticationManagerFactory factory = new LdapBindAuthenticationManagerFactory(source);
 		 factory.setUserDnPatterns("cn={0},ou=users,ou=srs,dc=srs,dc=com");
+		 factory.setLdapAuthoritiesPopulator(authoritiesPopulator);
 		 return factory.createAuthenticationManager();
 	 }
 	

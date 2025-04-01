@@ -30,6 +30,19 @@ services:
     depends_on:
       - ldap
     restart: always
+  mysql:
+    image: mysql:8.0
+    container_name: mysql_container
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword  # Root user password
+      MYSQL_DATABASE: SrsPortal        # Default database
+      MYSQL_USER: root                # Custom user
+      MYSQL_PASSWORD: password        # Custom user password
+    ports:
+      - "3306:3306" # Host Port : Container Port
+    volumes:
+      - ./docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
 
 volumes:
   ldap_data:
