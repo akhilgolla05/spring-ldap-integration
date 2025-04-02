@@ -37,7 +37,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: rootpassword  # Root user password
       MYSQL_DATABASE: SrsPortal        # Default database
-      MYSQL_USER: root                # Custom user
+      MYSQL_USER: user1                # Custom user
       MYSQL_PASSWORD: password        # Custom user password
     ports:
       - "3306:3306" # Host Port : Container Port

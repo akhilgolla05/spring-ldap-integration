@@ -26,14 +26,9 @@ public class CustomLdapAuthoritiesPopulator implements LdapAuthoritiesPopulator 
 
         try {
             // Search for user groups in LDAP
-             userData.getStringAttribute("gidNumber");
+             //userData.getStringAttribute("gidNumber");
              String type = userData.getStringAttribute("employeeType");
-            System.out.println(userData.getStringAttribute("employeeType"));
-//            List<String> groupNames = ldapTemplate.search(
-//                    "ou=users,ou=srs,dc=srs,dc=com", // 🔹 Base DN for group search
-//                    "(member=cn=" + username + ",ou=users,ou=srs,dc=srs,dc=com)", // 🔹 LDAP filter
-//                    (AttributesMapper<String>) attrs -> attrs.get("cn").get().toString()
-//            );
+            //System.out.println(userData.getStringAttribute("employeeType"));
 
             // Convert LDAP groups to Spring Security roles
 
