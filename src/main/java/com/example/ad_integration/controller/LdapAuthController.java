@@ -1,6 +1,7 @@
 package com.example.ad_integration.controller;
 
 import com.example.ad_integration.request.LoginRequest;
+import com.example.ad_integration.response.LoginResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +23,8 @@ public class LdapAuthController {
 		try {
 			Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
 			UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-			return ResponseEntity.ok("Hello "+ userDetails.getUsername()+" Logged in Successfully "+" your role is : "+userDetails.getAuthorities());
+			return ResponseEntity.status(HttpStatus.OK)
+					.body(new LoginResponse(userDetails.getUsername(), userDetails.getAuthorities().stream().findFirst().toString()));
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Bad Credentials");
 		}
